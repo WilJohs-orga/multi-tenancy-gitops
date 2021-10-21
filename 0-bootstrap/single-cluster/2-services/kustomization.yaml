@@ -21,18 +21,18 @@ resources:
 #- argocd/instances/ibm-process-mining-instance.yaml
 
 ## Cloud Pak for Data
-#- argocd/operators/ibm-cpd-platform-operator.yaml
-#- argocd/operators/ibm-cpd-scheduling-operator.yaml
-#- argocd/instances/ibm-cpd-instance.yaml
+- argocd/operators/ibm-cpd-platform-operator.yaml
+- argocd/operators/ibm-cpd-scheduling-operator.yaml
+- argocd/instances/ibm-cpd-instance.yaml
 
 ## IBM Foundational Services / Common Services
-#- argocd/operators/ibm-foundations.yaml
-#- argocd/instances/ibm-foundational-services-instance.yaml
+- argocd/operators/ibm-foundations.yaml
+- argocd/instances/ibm-foundational-services-instance.yaml
 #- argocd/operators/ibm-automation-foundation-core-operator.yaml
 #- argocd/operators/ibm-automation-foundation-operator.yaml
 
 ## IBM Catalogs
-#- argocd/operators/ibm-catalogs.yaml
+- argocd/operators/ibm-catalogs.yaml
 
 
 # Required for IBM MQ
@@ -42,7 +42,7 @@ resources:
 #- argocd/instances/cert-manager-instance.yaml
 
 # Sealed Secrets
-#- argocd/instances/sealed-secrets.yaml
+- argocd/instances/sealed-secrets.yaml
 
 # CICD
 #- argocd/operators/grafana-operator.yaml
@@ -68,29 +68,29 @@ resources:
 
 patches:
 - target:
-    group: argoproj.io
-    kind: Application
-    labelSelector: "gitops.tier.layer=services"
+	group: argoproj.io
+	kind: Application
+	labelSelector: "gitops.tier.layer=services"
   patch: |-
-    - op: add
-      path: /spec/source/repoURL
-      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
-    - op: add
-      path: /spec/source/targetRevision
-      value: ${GIT_GITOPS_SERVICES_BRANCH}
+	- op: add
+	  path: /spec/source/repoURL
+	  value: https://github.com/WilJohs-orga/multi-tenancy-gitops-services.git
+	- op: add
+	  path: /spec/source/targetRevision
+	  value: master
 - target:
-    group: argoproj.io
-    kind: Application
-    labelSelector: "gitops.tier.layer=services,gitops.tier.source=helm"
+	group: argoproj.io
+	kind: Application
+	labelSelector: "gitops.tier.layer=services,gitops.tier.source=helm"
   patch: |-
-    - op: add
-      path: /spec/source/repoURL
-      value: ${HELM_REPOURL}
+	- op: add
+	  path: /spec/source/repoURL
+	  value: https://charts.cloudnativetoolkit.dev
 - target:
-    name: ibm-automation-foundation-operator
+	name: ibm-automation-foundation-operator
   patch: |-
-    - op: add
-      path: /spec/source/helm/parameters/-
-      value:
-        name: spec.channel
-        value: v1.1
+	- op: add
+	  path: /spec/source/helm/parameters/-
+	  value:
+		name: spec.channel
+		value: v1.1
