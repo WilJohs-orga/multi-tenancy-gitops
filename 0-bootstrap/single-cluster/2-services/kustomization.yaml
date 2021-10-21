@@ -68,9 +68,9 @@ resources:
 
 patches:
 - target:
-  group: argoproj.io
-  kind: Application
-  labelSelector: "gitops.tier.layer=services"
+    group: argoproj.io
+    kind: Application
+    labelSelector: "gitops.tier.layer=services"
   patch: |-
     - op: add
       path: /spec/source/repoURL
@@ -79,9 +79,9 @@ patches:
       path: /spec/source/targetRevision
       value: master
 - target:
-  group: argoproj.io
-  kind: Application
-  labelSelector: "gitops.tier.layer=services,gitops.tier.source=helm"
+    group: argoproj.io
+    kind: Application
+    labelSelector: "gitops.tier.layer=services,gitops.tier.source=helm"
   patch: |-
     - op: add
       path: /spec/source/repoURL
