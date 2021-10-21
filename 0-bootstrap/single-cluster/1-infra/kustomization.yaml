@@ -23,8 +23,8 @@ patches:
     labelSelector: "gitops.tier.layer=infra"
   patch: |-
    - op: add
-      path: /spec/source/repoURL
-      value: https://github.com/WilJohs-orga/multi-tenancy-gitops-infra.git
+     path: /spec/source/repoURL
+     value: https://github.com/WilJohs-orga/multi-tenancy-gitops-infra.git
    - op: add
-      path: /spec/source/targetRevision
-      value: master
+     path: /spec/source/targetRevision
+     value: master
