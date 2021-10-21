@@ -18,9 +18,9 @@ resources:
 #- argocd/machinesets.yaml
 patches:
 - target:
-  group: argoproj.io
-  kind: Application
-  labelSelector: "gitops.tier.layer=infra"
+    group: argoproj.io
+    kind: Application
+    labelSelector: "gitops.tier.layer=infra"
   patch: |-
    - op: add
      value: https://github.com/WilJohs-orga/multi-tenancy-gitops-infra.git
